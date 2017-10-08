@@ -1,0 +1,141 @@
+#parse("common/head.html")
+
+<div class="zu-global-notify" id="zh-global-message" style="display:none">
+        <div class="zg-wrap">
+            <div class="zu-global-nitify-inner">
+            <a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+            <span class="zu-global-notify-icon"></span>
+            <span class="zu-global-notify-msg"></span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="zg-wrap zu-main clearfix ">
+            <ul class="letter-list">
+                #foreach($message in $messages)
+                <li id="conversation-item-10005_622873">
+                    <a class="letter-link" href="msg-list?conversationId=10005_622873&amp;updateRead=1&amp;msgType=1"></a>
+                    <div class="letter-info">$date.format('yyyy-MM-dd HH:mm:ss', $!{message.createdDate})</span>
+                        <div class="l-operate-bar">
+                            <a href="javascript:void(0);" class="sns-action-del" data-id="10005_622873">
+                            删除
+                            </a>
+                            <a href="msg-list?conversationId=10005_622873&amp;updateRead=1&amp;msgType=1">
+                                共$!{message.count}条会话
+                            </a>
+                        </div>
+                    </div>
+                    <div class="chat-headbox">
+                        <a class="list-head">
+                            <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
+                        </a>
+                    </div>
+                    <div class="letter-detail">
+                        <a title="通知" class="letter-name level-color-1">
+                            通知
+                        </a>
+                        <p class="letter-brief">
+                            <a href="/letterDetail/$!{message.conversationId}">
+                                $!{message.content}（不想再收到此类提醒？点击设置 ）
+                            </a>
+                        </p>
+                    </div>
+                </li>
+                #end
+                </ul>
+
+        </div>
+        <script type="text/javascript">
+          $(function(){
+
+            // If really is weixin
+            $(document).on('WeixinJSBridgeReady', function() {
+
+              $('.weixin-qrcode-dropdown').show();
+
+              var options = {
+                "img_url": "",
+                "link": "http://nowcoder.com/j/wt2rwy",
+                "desc": "",
+                "title": "读《Web 全栈工程师的自我修养》"
+              };
+
+              WeixinJSBridge.on('menu:share:appmessage', function (argv){
+                WeixinJSBridge.invoke('sendAppMessage', options, function (res) {
+                  // _report('send_msg', res.err_msg)
+                });
+              });
+
+              WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                WeixinJSBridge.invoke('shareTimeline', options, function (res) {
+                  // _report('send_msg', res.err_msg)
+                });
+              });
+
+              // $(window).on('touchmove scroll', function() {
+              //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              //     $('div.backdrop').show();
+              //     $('div.share-help').show();
+              //   } else {
+              //     $('div.backdrop').hide();
+              //     $('div.share-help').hide();
+              //   }
+              // });
+
+            });
+
+          })
+        </script>
+    </div>
+    <div id="zh-footer" class="zh-footer">
+<div class="content zg-wrap clearfix">
+<ul>
+
+<li><a href="https://liukanshan.zhihu.com" target="_blank">刘看山</a></li>
+
+<li><a href="/question/19581624" target="_blank">牛客指南</a></li>
+<li><a href="javascript:;" id="js-feedback-button">建议反馈</a></li>
+
+<li><a href="/app" target="_blank">移动应用</a></li>
+<li><a href="/careers">加入牛客</a></li>
+<li><a href="/terms" target="_blank">牛客协议</a></li>
+<li><a href="/contact">联系我们</a></li>
+
+</ul>
+
+<span class="copy">© 2016 牛客</span>
+
+</div>
+</div>
+
+  <div id="quick-download">
+    <button type="button" class="close-link btn-link" data-toggle="modal" data-target="#quick-download-app-modal"><i class="fa fa-times-circle"></i></button>
+
+    <a class="download-link" href="http://nowcoder.com/download">
+      <h3>牛客网</h3>
+      <h4>程序员的首选学习分享平台</h4>
+      <button type="button" class="btn btn-info btn-sm">下载 APP</button>
+    </a>
+
+    <div class="modal fade" id="quick-download-app-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">提示</div>
+          <div class="modal-body">
+            <div class="checkbox">
+              <label class="i-checks">
+                <input id="already-installed" type="checkbox"><i></i> 我已安装了牛客网App，不再显示
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-block btn-default" id="close-quick-download-app-modal">关 闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body></html>
